@@ -1,5 +1,5 @@
 cc_7.js
-// Define the company object with departments and their employees
+// Defining the company object (departments&employees)
 const company = {
     departments: [
         {
@@ -52,3 +52,31 @@ const company = {
         }
     ]
 };
+
+//Function calculating total salary of a department recursively
+function calculateDepartmentSalary(department) {
+    let totalSalary = 0;
+    
+    department.employees.forEach(employee => {
+        totalSalary += employee.salary;
+        
+        if (employee.subordinates.length > 0) {
+            // Recursively add salaries of subordinates
+            totalSalary += calculateEmployeeSalary(employee.subordinates);
+        }
+    });
+
+    return totalSalary;
+}
+// Helper function for recursion
+function calculateEmployeeSalary(employee) {
+    let salarySum = employee.salary;
+
+    if (employee.subordinates.length > 0) {
+        employee.subordinates.forEach(subordinate => {
+            salarySum += calculateEmployeeSalary(subordinate);
+        });
+    }
+
+    return salarySum;
+}

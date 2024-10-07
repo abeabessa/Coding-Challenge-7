@@ -80,3 +80,18 @@ function calculateEmployeeSalary(employee) {
 
     return salarySum;
 }
+//Calculate total salary for all departments in the company
+function calculateCompanySalary(company) {
+    let totalCompanySalary = 0;
+
+    company.departments.forEach(department => {
+        totalCompanySalary += calculateDepartmentSalary(department);
+    });
+
+    return totalCompanySalary;
+}
+
+// Example:
+console.log("Total salary for Engineering:", calculateDepartmentSalary(company.departments[0]));
+console.log("Total salary for Sales:", calculateDepartmentSalary(company.departments[1]));
+console.log("Total salary for the company:", calculateCompanySalary(company));

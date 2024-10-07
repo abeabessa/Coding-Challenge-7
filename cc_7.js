@@ -1,12 +1,11 @@
-cc_7.js
-// Defining the company object (departments&employees)
+// Defining the company object (departments & employees)
 const company = {
     departments: [
         {
             departmentName: 'Engineering',
             employees: [
                 {
-                    name: ' Alice',
+                    name: 'Alice',
                     salary: 100000,
                     subordinates: [
                         {
@@ -25,7 +24,7 @@ const company = {
                 {
                     name: 'David',
                     salary: 90000,
-                    suvordinates: []
+                    subordinates: []
                 }
             ]
         },
@@ -53,21 +52,23 @@ const company = {
     ]
 };
 
-//Function calculating total salary of a department recursively
+// Function calculating total salary of a department recursively
 function calculateDepartmentSalary(department) {
     let totalSalary = 0;
-    
     department.employees.forEach(employee => {
         totalSalary += employee.salary;
         
         if (employee.subordinates.length > 0) {
             // Recursively add salaries of subordinates
-            totalSalary += calculateEmployeeSalary(employee.subordinates);
-        }
+            employee.subordinates.forEach(subordinate => {
+                totalSalary += calculateEmployeeSalary(subordinate);
+            });
+        } 
     });
 
     return totalSalary;
 }
+
 // Helper function for recursion
 function calculateEmployeeSalary(employee) {
     let salarySum = employee.salary;
@@ -80,7 +81,8 @@ function calculateEmployeeSalary(employee) {
 
     return salarySum;
 }
-//Calculate total salary for all departments in the company
+
+// Calculate total salary for all departments in the company
 function calculateCompanySalary(company) {
     let totalCompanySalary = 0;
 
